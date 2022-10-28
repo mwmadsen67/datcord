@@ -1,0 +1,25 @@
+{
+  "name": "datcord",
+  "version": "1.0.0",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "directories": {
+    "lib": "lib"
+  },
+  "engines": {
+    "node": "17.0.1"
+  },
+  "scripts": {
+    "build": "npm install --prefix frontend && npm run build --prefix frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwmadsen67/datcord.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mwmadsen67/datcord/issues"
+  },
+  "homepage": "https://github.com/mwmadsen67/datcord#readme"
+}

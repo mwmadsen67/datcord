@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf";
 const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 const LOGOUT_USER = "LOGOUT_USER"
 
-const receiveCurrentUser = (user) => ({
+export const receiveCurrentUser = (user) => ({
   type: RECEIVE_CURRENT_USER,
   user
 })

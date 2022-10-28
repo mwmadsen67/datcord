@@ -1,3 +1,4 @@
+import { receiveCurrentUser } from "./session"
 
 export const csrfFetch = async (url, options = {}) => {
   options.headers ||= {}
@@ -25,6 +26,6 @@ export const restoreCSRF = async () => {
 
   const token = response.headers.get('X-CSRF-Token')
   if (token) sessionStorage.setItem('X-CSRF-Token', token)
-
+  
   return response;
 }

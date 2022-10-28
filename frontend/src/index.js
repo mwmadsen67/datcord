@@ -28,7 +28,7 @@ const renderApp = () => (ReactDOM.render(
   document.getElementById('root')
 ));
 
-if (!sessionStorage['X-CSRF-Token']) {
+if (sessionStorage['X-CSRF-Token']) {
   restoreCSRF()
   .then(() => renderApp());
 } else {
