@@ -1,3 +1,5 @@
+require "open-uri"
+
 class User < ApplicationRecord
   validates :username, :email, :session_token, presence: true, uniqueness: true
   validates :username, length: { in: 6..36 }
@@ -7,7 +9,7 @@ class User < ApplicationRecord
   validates :password, length: { in: 8..128 }, allow_nil: true
   # validates :name, length: { in: 2..32 }
 
-  before_validation :ensure_session_token
+  before_validation :ensure_session_token, :generate_default_pic
 
   has_one_attached :photo
 
@@ -36,6 +38,13 @@ class User < ApplicationRecord
       nametag = "#{username}##{rand(1000..9999)}"
     end
     nametag
+  end
+
+  def generate_default_pic
+    unless self.photo.attached?
+      file = URI.open("https://datcord-seeds.s3.us-west-1.amazonaws.com/datcorddefault.jpeg")
+      self.photo.attach(io: file, filename: "default")
+    end
   end
   
   private

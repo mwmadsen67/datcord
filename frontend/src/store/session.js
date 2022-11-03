@@ -12,16 +12,31 @@ const logoutUser = () => ({
   type: LOGOUT_USER
 })
 
+export const signup = (user) => dispatch => {
+  return csrfFetch('api/users', { method: 'POST', body: JSON.stringify(user) })
+    .then(res => res.json())
+    .then(data => {
+      storeCurrentUser(data.user);
+      return dispatch(receiveCurrentUser(data.user))
+    })
+}
+
 export const login = (user) => dispatch => {
   return csrfFetch('api/session', {method: 'POST', body: JSON.stringify(user)})
     .then(res => res.json())
-    .then(data => dispatch(receiveCurrentUser(data)))
+    .then(data => {
+      storeCurrentUser(data.user);
+      return dispatch(receiveCurrentUser(data.user))
+    })
 }
 
 export const logout = () => dispatch => {
   return csrfFetch('api/session', {method: 'DELETE'})
     .then(res => res.json())
-    .then(data => dispatch(logoutUser()))
+    .then(data => {
+      storeCurrentUser(null);
+      return dispatch(logoutUser())
+    })
 }
 
 export const storeCurrentUser = user => {
@@ -38,15 +53,26 @@ export const restoreSession = () => async dispatch => {
   const response = await csrfFetch("/api/session");
   storeCSRFToken(response);
   const data = await response.json();
-  debugger
-  storeCurrentUser(data);
-  dispatch(receiveCurrentUser(data));
+  storeCurrentUser(data.user);
+  dispatch(receiveCurrentUser(data.user));
   return response;
 };
 
 const initialState = {
   user: JSON.parse(sessionStorage.getItem("currentUser"))
 };
+
+export const usersReducer = (state = {}, action) => {
+  const nextState = Object.assign({}, state)
+
+  switch (action.type) {
+    // case RECEIVE_CURRENT_USER:
+    //   nextState[action.user.id] = action.user
+    //   return nextState;
+    default:
+      return state;
+  }
+}
 
 export const sessionsReducer = (state = initialState, action) => {
   const nextState = Object.assign({}, state);

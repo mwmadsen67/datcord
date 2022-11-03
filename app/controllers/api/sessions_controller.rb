@@ -4,6 +4,8 @@ class Api::SessionsController < ApplicationController
     @user = current_user
     if @user 
       render 'api/users/show'
+    else
+      render json: {user: nil}
     end
   end
 
@@ -14,6 +16,15 @@ class Api::SessionsController < ApplicationController
       render 'api/users/show'
     else
       render json: {errors: ['Login or password is invalid']}, status: :unauthorized
+    end
+  end
+
+  def destroy
+    if current_user
+      logout!
+      render json: ["logged out"]
+    else
+      render json: ["not logged in!"]
     end
   end
   
