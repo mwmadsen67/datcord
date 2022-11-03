@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import configureStore from './store'
 import { restoreCSRF } from './store/csrf';
+import { restoreSession } from './store/session';
 
 const store = configureStore();
 
@@ -28,10 +29,11 @@ const renderApp = () => (ReactDOM.render(
   document.getElementById('root')
 ));
 
-if (sessionStorage['X-CSRF-Token']) {
-  restoreCSRF()
-  .then(() => renderApp());
-} else {
+if (sessionStorage.getItem("currentUser")) {
   renderApp();
+} else {
+  store.dispatch(restoreSession()).then(renderApp)
 }
+
+
 

@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   before_validation :ensure_session_token
 
+  has_one_attached :photo
+
   has_secure_password
 
   def self.find_by_credentials(email, password)
