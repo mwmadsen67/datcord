@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+require "open-uri"
 
 ApplicationRecord.transaction do 
   puts "Destroying tables..."
@@ -17,11 +18,14 @@ ApplicationRecord.transaction do
 
   puts "Creating users..."
   # Create one user with an easy to remember username, email, and password:
-  User.create!(
+  user = User.create!(
     username: 'Demo-lish', 
     email: 'demo@user.io', 
     password: 'password'
   )
+
+  file = URI.open("https://datcord-seeds.s3.us-west-1.amazonaws.com/datcorddefault.jpeg")
+  user.photo.attach(io: file, filename: "default")
 
 
   puts "Done!"
