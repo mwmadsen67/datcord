@@ -1,1 +1,6 @@
 /* TODO Add site wide styles */
+
+.map {
+  width: 500px;
+  height: 500px;
+}

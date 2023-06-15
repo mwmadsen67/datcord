@@ -8,10 +8,25 @@ class User < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, length: { in: 8..128 }, allow_nil: true
   # validates :name, length: { in: 2..32 }
-
+  
   before_validation :ensure_session_token, :generate_default_pic
 
   has_one_attached :photo
+
+  has_many :servers_owned,
+    foreign_key: :owner_id,
+    class_name: :Server
+
+  has_many :server_subscriptions,
+    dependent: :destroy
+
+  has_many :servers_subscribed_to,
+    through: :server_subscriptions,
+    source: :server
+
+  has_many :messages,
+    foreign_key: :user_id,
+    class_name: :Message
 
   has_secure_password
 

@@ -22,7 +22,7 @@
 // }
 
 export const restoreCSRF = async () => {
-  const response = await csrfFetch('api/session');
+  const response = await csrfFetch('/api/session');
   const token = response.headers.get('X-CSRF-Token')
   if (token) sessionStorage.setItem('X-CSRF-Token', token)
   
@@ -39,8 +39,9 @@ export async function csrfFetch(url, options = {}) {
   // "application/json" and set the "X-CSRF-Token" header to the value of the
   // "CSRF-TOKEN" cookie
   if (options.method.toUpperCase() !== "GET") {
-    options.headers["Content-Type"] =
-      options.headers["Content-Type"] || "application/json";
+    if (!options.headers["Content-Type"] && !(options.body instanceof FormData)) {
+      options.headers["Content-Type"] = "application/json";
+    }
     options.headers["X-CSRF-Token"] = sessionStorage.getItem('X-CSRF-Token');
   }
 

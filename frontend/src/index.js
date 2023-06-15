@@ -32,7 +32,7 @@ const renderApp = () => (ReactDOM.render(
 if (sessionStorage.getItem("currentUser")) {
   renderApp();
 } else {
-  store.dispatch(restoreSession()).then(renderApp)
+  store.dispatch(restoreSession()).then(renderApp);
 }
 
 

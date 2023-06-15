@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_03_002253) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_18_010643) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,42 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_03_002253) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "channels", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "server_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["server_id", "name"], name: "index_channels_on_server_id_and_name", unique: true
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "body", null: false
+    t.bigint "user_id", null: false
+    t.string "messageable_type", null: false
+    t.bigint "messageable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["messageable_type", "messageable_id"], name: "index_messages_on_messageable"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "server_subscriptions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "server_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["server_id"], name: "index_server_subscriptions_on_server_id"
+    t.index ["user_id", "server_id"], name: "index_server_subscriptions_on_user_id_and_server_id", unique: true
+  end
+
+  create_table "servers", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "owner_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_servers_on_owner_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "username", null: false
@@ -57,4 +93,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_03_002253) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "channels", "servers"
+  add_foreign_key "messages", "users"
+  add_foreign_key "server_subscriptions", "servers"
+  add_foreign_key "server_subscriptions", "users"
+  add_foreign_key "servers", "users", column: "owner_id"
 end
