@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUser, fetchUser } from '../store/session';
+import { updateUser, fetchUser } from '../../store/session';
 
 const EditUserForm = (props) => {
 

@@ -1,4 +1,4 @@
-import { createConsumer } from "@rails/actioncable";
+import {createConsumer} from "@rails/actioncable"
 
 let wsUrl;
 if (process.env.NODE_ENV !== "production")

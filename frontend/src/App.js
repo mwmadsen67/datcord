@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import NavBar from "./components/NavBar";
-import EditUserForm from "./components/EditUserForm";
+import EditUserForm from "./components/session/EditUserForm";
 import { restoreSession } from "./store/session";
-import {Channel} from './components/Channel';
+import Channel from './components/chat/Channel';
 // import MapWrapper from "./components/TestMap";
 
 function App() {
@@ -19,7 +19,6 @@ function App() {
     <div>
       <span>Click the photo to edit profile</span>
       <NavLink activeStyle={{display: "none"}} to={`/userUpdate/${user.id}`}><img src={user.photoUrl}/></NavLink>
-      <Channel />
     </div>
     ) : null
   return (
@@ -29,6 +28,7 @@ function App() {
       <Route path="/userUpdate/:userId" component={EditUserForm} />
       <Route path="/login" component={LoginFormPage} />
       <Route path="/signup" component={SignupFormPage} />
+      <Route path="/channel/:channelId" component={Channel} />
       {/* <MapWrapper /> */}
     </>
 
