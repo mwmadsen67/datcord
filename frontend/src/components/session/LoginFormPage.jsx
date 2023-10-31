@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { login } from '../store/session'
+import { login } from '../../store/session'
 import { Redirect } from 'react-router-dom'
 
 const LoginFormPage = (props) => {
 
   const dispatch = useDispatch();
-  const loggedIn = useSelector(state => state.session.user)
+  // const loggedIn = useSelector(state => state.session.user)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  // console.log('hello')
 
-  if (loggedIn) {
-    return <Redirect to="/" />
-  }
+  // if (loggedIn) {
+  //   return <Redirect to="/" />
+  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();

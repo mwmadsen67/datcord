@@ -20,7 +20,7 @@ function Channel() {
   }, [channelId, dispatch])
 
   return (
-    
+    <div></div>
   )
   
 }

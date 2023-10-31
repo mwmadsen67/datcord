@@ -18,7 +18,7 @@ class Api::UsersController < ApplicationController
   def update
     # debugger
     @user = User.find_by(id: params[:id])
-    @user.photo.attach(io: params[:user][:photo], filename: 'updated_photo.jpg')
+    # @user.photo.attach(io: params[:user][:photo], filename: 'updated_photo.jpg')
     if @user.update(user_params)
       render :show
     else

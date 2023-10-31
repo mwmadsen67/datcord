@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { signup } from '../store/session'
+import { signup } from '../../store/session'
 import { Redirect } from 'react-router-dom'
 
 const SignupFormPage = (props) => {

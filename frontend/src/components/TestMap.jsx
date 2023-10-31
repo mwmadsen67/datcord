@@ -22,7 +22,7 @@ const TestMap = (props) => {
 
 const MapWrapper = () => {
   return (
-    <Wrapper apiKey={process.env.REACT_APP_MAPS_API_KEY}>
+    <Wrapper apiKey={process.env.VITE_MAPS_API_KEY}>
       <TestMap />
     </Wrapper>
   )

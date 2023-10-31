@@ -1,7 +1,7 @@
 import { NavLink, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import LoginFormPage from "./components/LoginFormPage";
-import SignupFormPage from "./components/SignupFormPage";
+import LoginFormPage from "./components/session/LoginFormPage";
+import SignupFormPage from "./components/session/SignupFormPage";
 import NavBar from "./components/NavBar";
 import EditUserForm from "./components/session/EditUserForm";
 import { restoreSession } from "./store/session";

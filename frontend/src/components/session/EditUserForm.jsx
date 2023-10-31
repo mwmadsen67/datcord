@@ -45,7 +45,7 @@ const EditUserForm = (props) => {
     dispatch(updateUser(userId, formData));
   }
 
-  const preview = photoUrl ? <img src={photoUrl}/> : null
+  const preview = photoUrl ? <img className="preview-image" src={photoUrl}/> : null
 
   return (
     <div className="user-form">

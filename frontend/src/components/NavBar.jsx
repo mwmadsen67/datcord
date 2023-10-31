@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logout } from '../store/session'
+import LoginFormModal from './session/LoginFormModal'
 
 const NavBar = (props) => {
   const dispatch = useDispatch()
@@ -17,6 +18,7 @@ const NavBar = (props) => {
     </div>
     ) : (
       <div>
+        {/* <LoginFormModal /> */}
         <Link to="/login">Login</Link>
         <Link to="/signup">Signup</Link>
       </div>
